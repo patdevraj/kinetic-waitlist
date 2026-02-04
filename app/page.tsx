@@ -8,6 +8,10 @@ export default function Home() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+<<<<<<< HEAD
+=======
+  const [pulseGlow, setPulseGlow] = useState(false);
+>>>>>>> 9c1c3ed (Remove env file from repo)
   const totalSpots = 200;
   const claimedSpots = waitlistCount ?? 142;
   const progressPercent = Math.min(
@@ -32,6 +36,13 @@ export default function Home() {
   useEffect(() => {
     fetchWaitlistCount();
   }, []);
+
+  useEffect(() => {
+    if (waitlistCount === null) return;
+    setPulseGlow(true);
+    const timeout = window.setTimeout(() => setPulseGlow(false), 600);
+    return () => window.clearTimeout(timeout);
+  }, [waitlistCount]);
 
   return (
     <div className="min-h-screen text-[color:var(--text)]">
@@ -192,11 +203,21 @@ export default function Home() {
               <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]">
                 {waitlistCount === null
                   ? "142 / 200 Founding Spots Claimed"
+<<<<<<< HEAD
                   : `${claimedSpots} / ${totalSpots} Founding Spots Claimed`}
               </div>
               <div className="h-2 w-full rounded-full bg-[color:rgba(0,224,224,0.12)]">
                 <div
                   className="progress-glow h-2 rounded-full bg-[color:var(--cyan-1)]"
+=======
+                  : `${Math.min(waitlistCount, totalSpots)} / ${totalSpots} Founding Spots Claimed`}
+              </div>
+              <div className="h-2 w-full rounded-full bg-[color:rgba(0,224,224,0.12)]">
+                <div
+                  className={`progress-glow h-2 rounded-full bg-[color:var(--cyan-1)] transition-all duration-700 ${
+                    pulseGlow ? "progress-glow-boost" : ""
+                  }`}
+>>>>>>> 9c1c3ed (Remove env file from repo)
                   style={{
                     width: `${progressPercent}%`,
                   }}
@@ -213,6 +234,7 @@ export default function Home() {
           <div className="fade-up fade-delay-2 order-1 md:order-none">
             <div className="glass-card relative overflow-hidden p-4">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,224,224,0.18),_transparent_60%)]" />
+<<<<<<< HEAD
               <div className="relative flex min-h-[320px] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,10,24,0.6)] px-6 py-10 text-center">
                 <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--cyan-1)]">
                   Kinetic
@@ -223,6 +245,17 @@ export default function Home() {
                 <p className="text-sm text-[color:rgba(234,251,255,0.68)]">
                   Replace this placeholder with a looping biomechanics visual.
                 </p>
+=======
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,10,24,0.6)] shadow-[0_0_24px_rgba(0,224,224,0.16)]">
+                <Image
+                  src="/kinetic-hero.png"
+                  alt="Kinetic biomechanics visual"
+                  fill
+                  sizes="(min-width: 768px) 42vw, 100vw"
+                  className="object-contain"
+                  priority
+                />
+>>>>>>> 9c1c3ed (Remove env file from repo)
               </div>
             </div>
           </div>
