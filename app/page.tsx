@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -9,6 +8,12 @@ export default function Home() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+  const totalSpots = 200;
+  const claimedSpots = waitlistCount ?? 142;
+  const progressPercent = Math.min(
+    100,
+    Math.round((claimedSpots / totalSpots) * 100)
+  );
 
   const fetchWaitlistCount = async () => {
     try {
@@ -45,10 +50,13 @@ export default function Home() {
             <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,16,32,0.7)] px-3 py-1 text-xs font-medium text-[color:var(--cyan-0)] shadow-[0_0_18px_rgba(0,224,224,0.18)]">
               The Future of Fitness
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               <h1 className="text-4xl font-semibold leading-tight tracking-tight text-[color:var(--text)] sm:text-5xl">
-                The Future of Fitness.
+                Stop Guessing. Start Training.
               </h1>
+              <p className="text-lg font-medium text-[color:rgba(234,251,255,0.78)] sm:text-xl">
+                The Future of Fitness.
+              </p>
               <p className="text-base leading-relaxed text-[color:rgba(234,251,255,0.72)] sm:text-lg">
                 Kinetic fuses phone-camera biomechanics with wearable biometrics
                 to create movement intelligence—real coaching, in real time.
@@ -128,7 +136,7 @@ export default function Home() {
                   </label>
 
                   <label className="flex flex-col gap-2 text-sm font-medium text-[color:rgba(234,251,255,0.7)]">
-                    Training stage (optional)
+                    Current Training Phase (optional)
                     <select
                       name="stage"
                       className="h-11 rounded-xl border border-[color:rgba(0,224,224,0.35)] bg-transparent px-3 text-base text-[color:var(--text)] shadow-[0_0_16px_rgba(0,224,224,0.08)] outline-none transition focus:border-[color:rgba(0,224,224,0.8)] focus:ring-2 focus:ring-[color:rgba(0,224,224,0.35)]"
@@ -137,10 +145,10 @@ export default function Home() {
                       <option value="" disabled>
                         Select a stage
                       </option>
-                      <option value="building">Building base</option>
-                      <option value="intensifying">Intensifying</option>
-                      <option value="peaking">Peaking</option>
-                      <option value="recovering">Recovering</option>
+                      <option value="Building Base">Building Base</option>
+                      <option value="Performance">Performance</option>
+                      <option value="Peaking">Peaking</option>
+                      <option value="Recovering">Recovering</option>
                     </select>
                   </label>
 
@@ -180,25 +188,89 @@ export default function Home() {
               Founding 200 get 3 months free + priority onboarding
             </div>
 
-            <div className="inline-flex w-fit items-center rounded-full border border-[color:rgba(0,224,224,0.5)] bg-[color:rgba(0,16,32,0.8)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)] shadow-[0_0_18px_rgba(0,224,224,0.22)]">
-              {waitlistCount === null
-                ? "Limited spots available"
-                : `Spots remaining: ${Math.max(0, 200 - waitlistCount)}`}
+            <div className="glass-card flex flex-col gap-3 px-4 py-3">
+              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]">
+                {waitlistCount === null
+                  ? "142 / 200 Founding Spots Claimed"
+                  : `${claimedSpots} / ${totalSpots} Founding Spots Claimed`}
+              </div>
+              <div className="h-2 w-full rounded-full bg-[color:rgba(0,224,224,0.12)]">
+                <div
+                  className="progress-glow h-2 rounded-full bg-[color:var(--cyan-1)]"
+                  style={{
+                    width: `${progressPercent}%`,
+                  }}
+                />
+              </div>
+              {waitlistCount === null ? (
+                <p className="text-xs text-[color:rgba(234,251,255,0.55)]">
+                  Limited spots available.
+                </p>
+              ) : null}
             </div>
           </div>
 
           <div className="fade-up fade-delay-2 order-1 md:order-none">
             <div className="glass-card relative overflow-hidden p-4">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,224,224,0.18),_transparent_60%)]" />
-        <Image
-                src="/kinetic-hero.png"
-                alt="Kinetic futuristic training visualization"
-                width={600}
-                height={720}
-                className="relative h-auto w-full rounded-2xl object-cover"
-          priority
-        />
+              <div className="relative flex min-h-[320px] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,10,24,0.6)] px-6 py-10 text-center">
+                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--cyan-1)]">
+                  Kinetic
+                </div>
+                <div className="text-lg font-semibold text-[color:var(--text)]">
+                  Real-time movement tracking (preview)
+                </div>
+                <p className="text-sm text-[color:rgba(234,251,255,0.68)]">
+                  Replace this placeholder with a looping biomechanics visual.
+                </p>
+              </div>
             </div>
+          </div>
+        </section>
+
+        <section className="fade-up flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:rgba(0,224,224,0.7)]">
+              From Data to Insight
+            </h2>
+          </div>
+          <div className="glass-card flex flex-col gap-6 p-6">
+            <div className="flex flex-col items-center gap-4 text-sm text-[color:rgba(234,251,255,0.75)] sm:flex-row sm:justify-between">
+              <div className="flex w-full flex-col items-center gap-2 rounded-2xl border border-[color:rgba(0,224,224,0.25)] bg-[color:rgba(0,10,24,0.7)] px-4 py-4 text-center sm:w-[30%]">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]">
+                  Wearable
+                </div>
+                <div className="text-sm font-semibold text-[color:var(--text)]">
+                  Heart Rate / Recovery
+                </div>
+              </div>
+
+              <div className="text-[color:rgba(0,224,224,0.8)]">→</div>
+
+              <div className="flex w-full flex-col items-center gap-2 rounded-2xl border border-[color:rgba(0,224,224,0.25)] bg-[color:rgba(0,10,24,0.7)] px-4 py-4 text-center sm:w-[30%]">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]">
+                  Vision
+                </div>
+                <div className="text-sm font-semibold text-[color:var(--text)]">
+                  Joint Angles / Bar Path
+                </div>
+              </div>
+
+              <div className="text-[color:rgba(0,224,224,0.8)]">→</div>
+
+              <div className="flex w-full flex-col items-center gap-2 rounded-2xl border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,16,32,0.8)] px-4 py-4 text-center shadow-[0_0_18px_rgba(0,224,224,0.18)] sm:w-[30%]">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]">
+                  Coaching Insight
+                </div>
+                <div className="text-sm font-semibold text-[color:var(--text)]">
+                  Next Best Action
+                </div>
+              </div>
+            </div>
+            <p className="text-sm text-[color:rgba(234,251,255,0.68)]">
+              Kinetic fuses internal state with external movement to tell you
+              what to do next.
+            </p>
           </div>
         </section>
 
@@ -288,16 +360,52 @@ export default function Home() {
           <h2 className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:rgba(0,224,224,0.7)]">
             Integrates with
           </h2>
-          <div className="flex flex-wrap gap-3">
-            {["Apple Watch", "WHOOP", "Oura"].map((name) => (
-              <span
-                key={name}
-                className="neon-hover shimmer-chip rounded-full border border-[color:rgba(0,224,224,0.45)] bg-[color:rgba(0,16,32,0.65)] px-4 py-2 text-sm font-medium text-[color:var(--text)] shadow-[0_0_14px_rgba(0,224,224,0.16)]"
+          <div className="flex flex-wrap gap-4">
+            {[
+              { name: "Apple Watch", wordmark: "Apple Watch" },
+              { name: "WHOOP", wordmark: "WHOOP" },
+              { name: "Oura", wordmark: "Oura" },
+            ].map((brand) => (
+              <div
+                key={brand.name}
+                className="neon-hover group flex h-12 w-36 items-center justify-center rounded-2xl border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,16,32,0.65)] shadow-[0_0_16px_rgba(0,224,224,0.12)]"
               >
-                {name}
-              </span>
+                <svg
+                  viewBox="0 0 180 48"
+                  className="h-6 w-28 text-[color:rgba(234,251,255,0.92)] transition group-hover:text-[color:var(--text)]"
+                  role="img"
+                  aria-label={`${brand.name} logo placeholder`}
+                >
+                  <title>{brand.name}</title>
+                  <rect
+                    x="6"
+                    y="6"
+                    width="168"
+                    height="36"
+                    rx="18"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    opacity="0.35"
+                  />
+                  <text
+                    x="90"
+                    y="30"
+                    textAnchor="middle"
+                    fontSize="16"
+                    fontFamily="Arial, sans-serif"
+                    fill="currentColor"
+                    letterSpacing="1.6"
+                  >
+                    {brand.wordmark}
+                  </text>
+                </svg>
+              </div>
             ))}
           </div>
+          <p className="text-xs text-[color:rgba(234,251,255,0.5)]">
+            Replace placeholders with official monochrome logo assets.
+          </p>
         </section>
 
         <footer className="fade-up mt-6 flex flex-col items-center gap-2 border-t border-[color:rgba(0,224,224,0.2)] pt-8 text-center">
