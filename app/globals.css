@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-0: #000020;
+  --bg-1: #001020;
+  --cyan-0: #00d0e0;
+  --cyan-1: #00e0e0;
+  --cyan-2: #10c0d0;
+  --text: #eafbff;
+  --mx: 50%;
+  --my: 40%;
+  --background: var(--bg-0);
+  --foreground: var(--text);
 }
 
 @theme inline {
@@ -12,15 +20,180 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background-color: var(--bg-0);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      600px circle at var(--mx, 50%) var(--my, 40%),
+      rgba(0, 224, 224, 0.14),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px circle at var(--mx, 50%) var(--my, 40%),
+      rgba(0, 224, 224, 0.08),
+      transparent 70%
+    ),
+    radial-gradient(60% 60% at 20% 10%, rgba(0, 224, 224, 0.22), transparent 60%),
+    radial-gradient(50% 50% at 80% 30%, rgba(0, 208, 224, 0.18), transparent 65%),
+    radial-gradient(70% 70% at 50% 90%, rgba(16, 192, 208, 0.18), transparent 70%);
+  filter: blur(0px);
+  animation: kinetic-glow 14s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -2;
+}
+
+html[data-glow-pulse="1"] body::before {
+  background:
+    radial-gradient(
+      600px circle at var(--mx, 50%) var(--my, 40%),
+      rgba(0, 224, 224, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px circle at var(--mx, 50%) var(--my, 40%),
+      rgba(0, 224, 224, 0.12),
+      transparent 70%
+    ),
+    radial-gradient(60% 60% at 20% 10%, rgba(0, 224, 224, 0.22), transparent 60%),
+    radial-gradient(50% 50% at 80% 30%, rgba(0, 208, 224, 0.18), transparent 65%),
+    radial-gradient(70% 70% at 50% 90%, rgba(16, 192, 208, 0.18), transparent 70%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 224, 224, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 224, 224, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.neon-hover {
+  transition: box-shadow 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.neon-hover:hover {
+  box-shadow:
+    0 0 12px rgba(0, 224, 224, 0.6),
+    0 0 28px rgba(0, 208, 224, 0.35);
+  border-color: rgba(0, 224, 224, 0.8);
+  color: var(--text);
+}
+
+.glass-card {
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 224, 224, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 16, 32, 0.75),
+    rgba(0, 8, 20, 0.88)
+  );
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 0 20px rgba(0, 224, 224, 0.12),
+    inset 0 0 12px rgba(0, 224, 224, 0.08);
+}
+
+.glow-step {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-step::after {
+  content: "";
+  position: absolute;
+  inset: -40% 40% 40% -40%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 224, 224, 0.22),
+    transparent 60%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.shimmer-chip {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-chip::after {
+  content: "";
+  position: absolute;
+  top: -120%;
+  left: -120%;
+  width: 240%;
+  height: 240%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(0, 224, 224, 0.18) 45%,
+    rgba(0, 224, 224, 0.36) 50%,
+    rgba(0, 224, 224, 0.18) 55%,
+    transparent 100%
+  );
+  opacity: 0.45;
+  animation: shimmer 6s linear infinite;
+  pointer-events: none;
+}
+
+.fade-up {
+  animation: fade-up 0.9s ease both;
+}
+
+.fade-delay-1 {
+  animation-delay: 0.12s;
+}
+
+.fade-delay-2 {
+  animation-delay: 0.24s;
+}
+
+@keyframes kinetic-glow {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.02) translateY(-8px);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.04) translateY(6px);
+    opacity: 0.75;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-35%) rotate(10deg);
+  }
+  100% {
+    transform: translateX(35%) rotate(10deg);
+  }
 }
