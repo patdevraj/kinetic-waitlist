@@ -1,3 +1,7 @@
+// top of app/api/waitlist/route.ts (server code)
+console.log("ENV CHECK - SUPABASE_URL present:", !!process.env.SUPABASE_URL);
+console.log("ENV CHECK - SUPABASE_ANON_KEY present:", !!process.env.SUPABASE_ANON_KEY);
+
 import { NextResponse } from "next/server";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
