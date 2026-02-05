@@ -365,6 +365,8 @@ export default function Home() {
                   height={24}
                   className="logo-glow h-5 w-auto opacity-85 transition group-hover:opacity-100 md:h-6"
                 />
+            </div>
+          </div>
 
           <div className="flex flex-wrap gap-4">
             {["Apple", "WHOOP", "ŌURA"].map((name) => (
@@ -373,7 +375,6 @@ export default function Home() {
                 className="glass-card flex h-12 w-40 items-center justify-center text-sm font-semibold uppercase tracking-[0.3em] text-[color:rgba(234,251,255,0.9)]"
               >
                 {name}
-
               </div>
             </div>
 
