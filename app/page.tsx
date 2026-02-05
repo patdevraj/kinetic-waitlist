@@ -400,7 +400,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
         </section>
 
         <footer className="fade-up mt-6 flex flex-col items-center gap-2 border-t border-[color:rgba(0,224,224,0.2)] pt-8 text-center">
