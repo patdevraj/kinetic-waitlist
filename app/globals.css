@@ -94,6 +94,15 @@ body::after {
   color: var(--text);
 }
 
+.logo-glow {
+  transition: filter 200ms ease;
+}
+
+.logo-glow:hover,
+.group:hover .logo-glow {
+  filter: drop-shadow(0 0 10px rgba(0, 224, 224, 0.6));
+}
+
 .glass-card {
   border-radius: 1.25rem;
   border: 1px solid rgba(0, 224, 224, 0.2);

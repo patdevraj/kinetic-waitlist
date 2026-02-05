@@ -393,52 +393,40 @@ export default function Home() {
           <h2 className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:rgba(0,224,224,0.7)]">
             Integrates with
           </h2>
-          <div className="flex flex-wrap gap-4">
-            {[
-              { name: "Apple Watch", wordmark: "Apple Watch" },
-              { name: "WHOOP", wordmark: "WHOOP" },
-              { name: "Oura", wordmark: "Oura" },
-            ].map((brand) => (
-              <div
-                key={brand.name}
-                className="neon-hover group flex h-12 w-36 items-center justify-center rounded-2xl border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,16,32,0.65)] shadow-[0_0_16px_rgba(0,224,224,0.12)]"
-              >
-                <svg
-                  viewBox="0 0 180 48"
-                  className="h-6 w-28 text-[color:rgba(234,251,255,0.92)] transition group-hover:text-[color:var(--text)]"
-                  role="img"
-                  aria-label={`${brand.name} logo placeholder`}
-                >
-                  <title>{brand.name}</title>
-                  <rect
-                    x="6"
-                    y="6"
-                    width="168"
-                    height="36"
-                    rx="18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    opacity="0.35"
-                  />
-                  <text
-                    x="90"
-                    y="30"
-                    textAnchor="middle"
-                    fontSize="16"
-                    fontFamily="Arial, sans-serif"
-                    fill="currentColor"
-                    letterSpacing="1.6"
-                  >
-                    {brand.wordmark}
-                  </text>
-                </svg>
+          <div className="flex flex-wrap items-center gap-6">
+            <div className="group flex items-center justify-center">
+              <div className="rounded-2xl bg-[color:rgba(0,10,24,0.7)] px-4 py-3">
+                <Image
+                  src="/logos/apple-health.png"
+                  alt="Apple Health"
+                  width={120}
+                  height={24}
+                  className="logo-glow h-5 w-auto opacity-85 transition group-hover:opacity-100 md:h-6"
+                />
               </div>
-            ))}
+            </div>
+
+            <div className="group flex items-center justify-center">
+              <div className="rounded-2xl bg-[color:rgba(0,10,24,0.7)] px-4 py-3">
+                <Image
+                  src="/logos/whoop.png"
+                  alt="WHOOP"
+                  width={120}
+                  height={24}
+                  className="logo-glow h-5 w-auto opacity-85 transition group-hover:opacity-100 md:h-6"
+                />
+              </div>
+            </div>
+
+            <div className="group flex items-center justify-center">
+              <div className="flex items-center gap-2 rounded-2xl bg-[color:rgba(0,10,24,0.7)] px-5 py-3 text-[color:rgba(234,251,255,0.92)] transition group-hover:text-[color:var(--text)]">
+                <div className="relative text-[15px] font-semibold tracking-[0.35em] md:text-[16px]">
+                  <span className="absolute left-[0.12em] top-0 h-[2px] w-[0.9em] rounded-full bg-[color:rgba(0,224,224,0.8)]" />
+                  ŌURA
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-xs text-[color:rgba(234,251,255,0.5)]">
-            Replace placeholders with official monochrome logo assets.
-          </p>
         </section>
 
         <footer className="fade-up mt-6 flex flex-col items-center gap-2 border-t border-[color:rgba(0,224,224,0.2)] pt-8 text-center">
