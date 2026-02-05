@@ -373,7 +373,7 @@ export default function Home() {
                 className="glass-card flex h-12 w-40 items-center justify-center text-sm font-semibold uppercase tracking-[0.3em] text-[color:rgba(234,251,255,0.9)]"
               >
                 {name}
- (Add Apple Health, WHOOP integrations and refine landing visuals)
+
               </div>
             </div>
 
