@@ -8,6 +8,7 @@ const DEFAULT_MY = "40%";
 export default function CursorGlow() {
   const frame = useRef<number | null>(null);
   const latest = useRef({ x: 0, y: 0 });
+  const pulseTimeout = useRef<number | null>(null);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -45,8 +46,12 @@ export default function CursorGlow() {
       root.style.setProperty("--mx", `${touch.clientX}px`);
       root.style.setProperty("--my", `${touch.clientY}px`);
       root.setAttribute("data-glow-pulse", "1");
-      window.setTimeout(() => {
+      if (pulseTimeout.current !== null) {
+        window.clearTimeout(pulseTimeout.current);
+      }
+      pulseTimeout.current = window.setTimeout(() => {
         root.removeAttribute("data-glow-pulse");
+        pulseTimeout.current = null;
       }, 300);
     };
 
@@ -61,6 +66,9 @@ export default function CursorGlow() {
     return () => {
       if (frame.current !== null) {
         window.cancelAnimationFrame(frame.current);
+      }
+      if (pulseTimeout.current !== null) {
+        window.clearTimeout(pulseTimeout.current);
       }
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchstart", handleTouchStart);

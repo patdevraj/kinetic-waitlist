@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -8,12 +9,8 @@ export default function Home() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
-<<<<<<< HEAD
-=======
-  const [pulseGlow, setPulseGlow] = useState(false);
->>>>>>> 9c1c3ed (Remove env file from repo)
   const totalSpots = 200;
-  const claimedSpots = waitlistCount ?? 142;
+  const claimedSpots = Math.min(waitlistCount ?? 142, totalSpots);
   const progressPercent = Math.min(
     100,
     Math.round((claimedSpots / totalSpots) * 100)
@@ -36,13 +33,6 @@ export default function Home() {
   useEffect(() => {
     fetchWaitlistCount();
   }, []);
-
-  useEffect(() => {
-    if (waitlistCount === null) return;
-    setPulseGlow(true);
-    const timeout = window.setTimeout(() => setPulseGlow(false), 600);
-    return () => window.clearTimeout(timeout);
-  }, [waitlistCount]);
 
   return (
     <div className="min-h-screen text-[color:var(--text)]">
@@ -203,21 +193,11 @@ export default function Home() {
               <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]">
                 {waitlistCount === null
                   ? "142 / 200 Founding Spots Claimed"
-<<<<<<< HEAD
                   : `${claimedSpots} / ${totalSpots} Founding Spots Claimed`}
               </div>
               <div className="h-2 w-full rounded-full bg-[color:rgba(0,224,224,0.12)]">
                 <div
-                  className="progress-glow h-2 rounded-full bg-[color:var(--cyan-1)]"
-=======
-                  : `${Math.min(waitlistCount, totalSpots)} / ${totalSpots} Founding Spots Claimed`}
-              </div>
-              <div className="h-2 w-full rounded-full bg-[color:rgba(0,224,224,0.12)]">
-                <div
-                  className={`progress-glow h-2 rounded-full bg-[color:var(--cyan-1)] transition-all duration-700 ${
-                    pulseGlow ? "progress-glow-boost" : ""
-                  }`}
->>>>>>> 9c1c3ed (Remove env file from repo)
+                  className="progress-glow h-2 rounded-full bg-[color:var(--cyan-1)] transition-all duration-700"
                   style={{
                     width: `${progressPercent}%`,
                   }}
@@ -234,18 +214,6 @@ export default function Home() {
           <div className="fade-up fade-delay-2 order-1 md:order-none">
             <div className="glass-card relative overflow-hidden p-4">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,224,224,0.18),_transparent_60%)]" />
-<<<<<<< HEAD
-              <div className="relative flex min-h-[320px] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,10,24,0.6)] px-6 py-10 text-center">
-                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--cyan-1)]">
-                  Kinetic
-                </div>
-                <div className="text-lg font-semibold text-[color:var(--text)]">
-                  Real-time movement tracking (preview)
-                </div>
-                <p className="text-sm text-[color:rgba(234,251,255,0.68)]">
-                  Replace this placeholder with a looping biomechanics visual.
-                </p>
-=======
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,10,24,0.6)] shadow-[0_0_24px_rgba(0,224,224,0.16)]">
                 <Image
                   src="/kinetic-hero.png"
@@ -255,7 +223,6 @@ export default function Home() {
                   className="object-contain"
                   priority
                 />
->>>>>>> 9c1c3ed (Remove env file from repo)
               </div>
             </div>
           </div>
@@ -270,6 +237,9 @@ export default function Home() {
           <div className="glass-card flex flex-col gap-6 p-6">
             <div className="flex flex-col items-center gap-4 text-sm text-[color:rgba(234,251,255,0.75)] sm:flex-row sm:justify-between">
               <div className="flex w-full flex-col items-center gap-2 rounded-2xl border border-[color:rgba(0,224,224,0.25)] bg-[color:rgba(0,10,24,0.7)] px-4 py-4 text-center sm:w-[30%]">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,16,32,0.8)] text-lg text-[color:var(--cyan-1)] shadow-[0_0_16px_rgba(0,224,224,0.25)]">
+                  ❤️
+                </span>
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]">
                   Wearable
                 </div>
@@ -281,6 +251,9 @@ export default function Home() {
               <div className="text-[color:rgba(0,224,224,0.8)]">→</div>
 
               <div className="flex w-full flex-col items-center gap-2 rounded-2xl border border-[color:rgba(0,224,224,0.25)] bg-[color:rgba(0,10,24,0.7)] px-4 py-4 text-center sm:w-[30%]">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,16,32,0.8)] text-lg text-[color:var(--cyan-1)] shadow-[0_0_16px_rgba(0,224,224,0.25)]">
+                  📐
+                </span>
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]">
                   Vision
                 </div>
@@ -292,6 +265,9 @@ export default function Home() {
               <div className="text-[color:rgba(0,224,224,0.8)]">→</div>
 
               <div className="flex w-full flex-col items-center gap-2 rounded-2xl border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,16,32,0.8)] px-4 py-4 text-center shadow-[0_0_18px_rgba(0,224,224,0.18)] sm:w-[30%]">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:rgba(0,224,224,0.35)] bg-[color:rgba(0,16,32,0.8)] text-lg text-[color:var(--cyan-1)] shadow-[0_0_16px_rgba(0,224,224,0.25)]">
+                  ✨
+                </span>
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]">
                   Coaching Insight
                 </div>
@@ -305,21 +281,6 @@ export default function Home() {
               what to do next.
             </p>
           </div>
-        </section>
-
-        <section className="fade-up fade-delay-1 grid gap-4 rounded-2xl border border-[color:rgba(0,224,224,0.2)] bg-[color:rgba(0,16,32,0.72)] p-5 shadow-[0_0_28px_rgba(0,224,224,0.15)] sm:grid-cols-3">
-          {[
-            "Vision → Joints",
-            "Wearables → Recovery",
-            "AI → Coaching",
-          ].map((item) => (
-            <div
-              key={item}
-              className="glass-card flex items-center justify-center px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--cyan-1)]"
-            >
-              {item}
-            </div>
-          ))}
         </section>
 
         <section className="fade-up rounded-2xl border border-[color:rgba(0,224,224,0.2)] bg-[color:rgba(0,16,32,0.82)] p-6 shadow-[0_0_30px_rgba(0,224,224,0.12)]">
@@ -393,6 +354,7 @@ export default function Home() {
           <h2 className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:rgba(0,224,224,0.7)]">
             Integrates with
           </h2>
+
           <div className="flex flex-wrap items-center gap-6">
             <div className="group flex items-center justify-center">
               <div className="rounded-2xl bg-[color:rgba(0,10,24,0.7)] px-4 py-3">
@@ -403,6 +365,15 @@ export default function Home() {
                   height={24}
                   className="logo-glow h-5 w-auto opacity-85 transition group-hover:opacity-100 md:h-6"
                 />
+
+          <div className="flex flex-wrap gap-4">
+            {["Apple", "WHOOP", "ŌURA"].map((name) => (
+              <div
+                key={name}
+                className="glass-card flex h-12 w-40 items-center justify-center text-sm font-semibold uppercase tracking-[0.3em] text-[color:rgba(234,251,255,0.9)]"
+              >
+                {name}
+ (Add Apple Health, WHOOP integrations and refine landing visuals)
               </div>
             </div>
 
