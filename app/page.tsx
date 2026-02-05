@@ -367,27 +367,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-
-            <div className="group flex items-center justify-center">
-              <div className="rounded-2xl bg-[color:rgba(0,10,24,0.7)] px-4 py-3">
-                <Image
-                  src="/logos/whoop.png"
-                  alt="WHOOP"
-                  width={120}
-                  height={24}
-                  className="logo-glow h-5 w-auto opacity-85 transition group-hover:opacity-100 md:h-6"
-                />
-              </div>
-            </div>
-
-            <div className="group flex items-center justify-center">
-              <div className="flex items-center gap-2 rounded-2xl bg-[color:rgba(0,10,24,0.7)] px-5 py-3 text-[color:rgba(234,251,255,0.92)] transition group-hover:text-[color:var(--text)]">
-                <div className="relative text-[15px] font-semibold tracking-[0.35em] md:text-[16px]">
-                  <span className="absolute left-[0.12em] top-0 h-[2px] w-[0.9em] rounded-full bg-[color:rgba(0,224,224,0.8)]" />
-                  ŌURA
-                </div>
-              </div>
-            </div>
         </section>
 
         <footer className="fade-up mt-6 flex flex-col items-center gap-2 border-t border-[color:rgba(0,224,224,0.2)] pt-8 text-center">
