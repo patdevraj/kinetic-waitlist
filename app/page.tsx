@@ -356,18 +356,6 @@ export default function Home() {
           </h2>
 
           <div className="flex flex-wrap items-center gap-6">
-            <div className="group flex items-center justify-center">
-              <div className="rounded-2xl bg-[color:rgba(0,10,24,0.7)] px-4 py-3">
-                <Image
-                  src="/logos/apple-health.png"
-                  alt="Apple Health"
-                  width={120}
-                  height={24}
-                  className="logo-glow h-5 w-auto opacity-85 transition group-hover:opacity-100 md:h-6"
-                />
-              </div>
-            </div>
-
             <div className="flex flex-wrap gap-4">
               {["Apple", "WHOOP", "ŌURA"].map((name) => (
                 <div
